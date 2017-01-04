@@ -6,7 +6,7 @@ Aplicación movil Demo desarrollada en framework Ract Native de Facebook
 
 El alcance funcional de este Demo, comprende:
 - Inicio de sesión
-- Panel de principal
+- Panel principal
 - Panel de seguimineto a reportes
 - Creación de un reporte
 - Modificaciones a datos del perfil
