@@ -2,11 +2,6 @@
 
 Aplicación movil Demo desarrollada en framework Ract Native de Facebook
 
-##Instalación
-
-Para su intalación siga los siguientes pasos:
-
-
 ##Alcance
 
 El alcance funcional de este Demo, comprende:
@@ -15,3 +10,8 @@ El alcance funcional de este Demo, comprende:
 - Panel de seguimineto a reportes
 - Creación de un reporte
 - Modificaciones a datos del perfil
+
+
+##Instalación
+
+Porfavor, para su intalación siga detenidamente los siguientes pasos:
