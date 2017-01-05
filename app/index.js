@@ -12,7 +12,7 @@ import Profile from './Profile';
 // Simple component to render something in place of icon
 const TabIcon = ({ selected, title }) => {
   return (
-    <Text style={{color: selected ? 'red' :'black'}}>{title}</Text>
+    <Text style={{color: selected ? '#006064' :'#333333'}}>{title}</Text>
   );
 }
 
@@ -31,19 +31,24 @@ const App = () => {
           tabBarStyle={{ backgroundColor: '#FFFFFF' }}
         >
           {/* Tab and it's scenes */}
-          <Scene key="dashboard" title="Dashboard" icon={TabIcon}>
+          <Scene key="dashboard" title="Incidentes" icon={TabIcon}>
             <Scene key="dash"
               component={DashBoard}
-              title="Dashboard"
+              title="Incidentes"
             />
           </Scene>
 
           <Scene key="login"
-          component={LogIn}
-          title="SeguridApp Jalisco"
-          hideTabBar={true}
-          initial
-        /> 
+            component={LogIn}
+            title="SeguridApp Jalisco"
+            hideTabBar={true}
+            initial
+          />
+
+          <Scene key="newreport"
+            component={NewReport}
+            title="Nuevo Reporte"
+          />
 
           {/* Tab and it's scenes */}
           <Scene key="myreports" title="Mis Reportes" icon={TabIcon}>
