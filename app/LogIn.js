@@ -10,6 +10,7 @@ import {
 import { Actions } from 'react-native-router-flux'
 import t from 'tcomb-form-native'
 import validator from 'tcomb-validation'
+import MapView from 'react-native-maps'
 var validate = validator.validate
 const Form = t.form.Form
 var styles_ = require('lodash')
@@ -27,7 +28,7 @@ stylesheet.textbox.error.width = 250
 
 /*Function to custom validation*/
 function sameUser(x) {
-  return x.usuario === "ciudadano";
+  return x.usuario === "user";
 }
 
 /*Dafault structure to Form*/
@@ -55,8 +56,8 @@ var options = {
 var LogIn = React.createClass({
 
   componentWillMount() {
-   if(!false) {
-       Actions.dashboard()
+   if(!this.state.loggedin) {
+       Actions.newreport()
    }
   },
   clearForm() {
@@ -66,17 +67,18 @@ var LogIn = React.createClass({
  getInitialState() {
     return {
       value: {},
-      options: options
+      options: options,
+      loggedin: false,
     };
   },
-  onChange(value) {
-    this.setState({value});
-  },
+
   onPress: function () {
       var value = this.refs.form.getValue();
       if (value) {
-        if(value.usuario=="ciudadano"&&value.usuario=="ciudadano")
+        if(value.usuario=="user"&&value.usuario=="user"){
             Actions.dashboard()
+            this.setState({ loggedin: true });
+        }
       }
       else{
 
@@ -102,7 +104,6 @@ var LogIn = React.createClass({
             type={UserInit}
              options={this.state.options}
              value={this.state.value}
-             onChange={this.onChange}
           />
           <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>Iniciar sesión</Text>
@@ -118,12 +119,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#333',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'white',
   },
   title: {
     fontSize: 30,

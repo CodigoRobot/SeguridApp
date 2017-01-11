@@ -42,7 +42,6 @@ export default class Profile extends Component {
 
   render () {
     actualUser = this.state.profileinfo.map(function (item) {
-console.log(item);
        return (
 
          <View style={styles.row} key={item.login}>

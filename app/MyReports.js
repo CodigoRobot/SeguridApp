@@ -70,7 +70,7 @@ export default class MyReports extends Component {
         <View style={ styles.container }>
           <ScrollView style={ {flex:1} } >
              <View style={ styles.header }>
-               <Text style={ styles.headerText }>Identificador</Text>
+               <Text style={ styles.headerText }>Folio Denuncia</Text>
                <Text style={ styles.headerText }>Fecha</Text>
              </View>
              <View style={ styles.content }>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   headerText:{
     fontWeight: 'bold',
     color: '#333',
-    fontSize: 22,
+    fontSize: 16,
     paddingTop: 20,
     paddingBottom: 20,
     flex: .5,
@@ -121,17 +121,17 @@ const styles = StyleSheet.create({
   row:{
     flexDirection: 'row',
     flex: 1,
-    borderBottomColor: 'rgba(120,120,120,.9)',
+    borderBottomColor: 'rgba(220,220,220,.7)',
     borderBottomWidth: .5,
   },
   cell:{
-    color: '#333',
+    color: '#FFF',
     fontSize: 14,
     fontWeight: 'bold',
     flex: .5,
     paddingBottom: 20,
     paddingTop: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   statusrow:{
     flexDirection: 'row',
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   statuscell:{
-    color: '#333',
+    color: '#FFF',
     fontSize: 14,
     flex: .5,
     textAlign: 'center',
@@ -150,15 +150,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   ea:{
-    backgroundColor: '#ffcdd2',
+    backgroundColor: '#b71c1c',
   },
   er:{
-    backgroundColor: '#f8bbd0',
+    backgroundColor: '#006064',
   },
   ei:{
-    backgroundColor: '#e1bee7',
+    backgroundColor: '#0d47a1',
   },
   cu:{
-    backgroundColor: '#bbdefb',
+    backgroundColor: '#880e4f',
   },
 })

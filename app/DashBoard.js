@@ -1,6 +1,6 @@
 // app/New Dashboard.js
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   StyleSheet,
   Text,
@@ -8,44 +8,137 @@ import {
   TouchableHighlight,
   Image,
   Linking,
-} from 'react-native';
-import { Actions } from 'react-native-router-flux';
-import MapView from 'react-native-maps';
+} from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import MapView from 'react-native-maps'
+import  base64  from 'base-64'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
+var headers = new Headers();
+headers.append("Authorization", "Basic " + base64.encode("admin:admin"));
 
-const Dashboard = () => {
+export default class DashBoard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+       markers: [],
+       region: {
+          latitude: 21.3,
+          longitude: -103.6,
+          latitudeDelta: 4.5,
+          longitudeDelta: 4.5,
+        },
+       visiblePosition: false,
+    }
+  }
+
+  componentWillMount() {
+
+    let markers;
+    fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/user-reports", {
+        headers: headers
+      })
+      .then((response) => {
+            if(response._bodyInit!==""){
+              markers =JSON.parse(response._bodyInit);
+              this.setState({ markers });
+            }
+      })
+      .done();
+  }
+
+  updateCurrentPosition() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+
+        var region= {
+           latitude: Number(position.coords.latitude),
+           longitude: Number(position.coords.longitude),
+           latitudeDelta: Number(.1),
+           longitudeDelta: Number(.1),
+         }
+         console.log(this.state.visiblePosition);
+         var visiblePosition=true;
+
+        this.setState({region});
+        this.setState({visiblePosition});
+        console.log(this.state.visiblePosition);
+
+      },
+      (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+  }
+
+  render(){
+    var color="";
+
+    custoMarket= this.state.markers.map(function (marker) {
+
+      if(marker.position!==""&&marker.position!==undefined){
+        marker.position2=marker.position.replace("POINT (", "").replace(")","").split(" ");
+        marker.latlng={latitude: Number(marker.position2[1]),
+            longitude: Number(marker.position2[0])}
+
+      switch (marker.estadoReporte){
+
+        case 'EsperaAtencion':
+            color= '#b71c1c'
+        break;
+        case 'EnRevision':
+            color= '#0d47a1'
+        break;
+        case 'EsperaInformacion':
+            color= '#006064'
+        break;
+        case 'Concluido':
+            color= '#880e4f'
+        break;
+        default:
+            color='white'
+        break;
+      }
+       return (
+           <MapView.Marker
+             key={marker.id}
+             coordinate={marker.latlng}
+             title=  {"Reporte "+marker.id}
+             description={marker.estadoReporte}
+           >
+            <Icon style={{fontSize: 40}}  name={"place"} color={color}/>
+            </MapView.Marker>
+        )
+      }
+    });
   return (
 
     <View style ={styles.container}>
       <MapView
         style ={styles.map}
-        region={{
-          latitude: 21.3,
-          longitude: -103.6,
-          latitudeDelta: 4.5,
-          longitudeDelta: 4.5,
-        }}
-      >
-      </MapView>
-      <TouchableHighlight style={styles.button_new} onPress={() => Actions.newreport()} >
-            <Text elevation={5} style={styles.textplus} >+</Text>
-    </TouchableHighlight>
-    <TouchableHighlight style={styles.button_panic} onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.jpriskcorp.botonpanicoapp.jal')}>
-            <Text elevation={25} style={styles.textpanic} > Botón de Pánico {this.props}</Text>
-  </TouchableHighlight>
+        showsUserLocation={this.state.visiblePosition}
+        region={this.state.region}
+        >
+          {custoMarket}
+        </MapView>
+        <TouchableHighlight style={styles.button_new} onPress={() => Actions.newreport()} >
+              <Text elevation={5} style={styles.textplus} >+</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.button_panic} onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.jpriskcorp.botonpanicoapp.jal')}>
+              <Text elevation={25} style={styles.textpanic} > Botón de Pánico </Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.current_position} onPress={() => this.updateCurrentPosition()}>
+            <Icon style={{fontSize: 24}}  name={'gps-fixed'} color='#333'/>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+};
 
-    </View>
-  );
-}
+
 
 const styles = StyleSheet.create({
 
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'white',
-  },
   container: {
      flex: 2,
      alignItems: 'flex-end',
@@ -91,6 +184,20 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontWeight: 'bold'
    },
+   current_position:{
+     width: 35,
+     height: 35,
+     borderRadius:20,
+     marginLeft:10,
+     marginTop:-60,
+     alignSelf: 'flex-start',
+     borderColor: 'gray',
+     backgroundColor: 'white',
+     transform: [{'translate':[0,0,1]}],
+     elevation: 12,
+     borderWidth : 5,
+     borderColor : 'white',
+   },
    textplus:{
      color: 'white',
      fontSize: 43,
@@ -98,6 +205,3 @@ const styles = StyleSheet.create({
    }
 
 });
-
-
-export default Dashboard;

@@ -16,10 +16,10 @@ import ViewReport from './ViewReport';
 const TabIcon = ({ selected, title }) => {
   var icon="";
   switch(title){
-      case 'Incidentes':
+      case 'Denuncias':
         icon='map';
       break;
-      case 'Mis Reportes':
+      case 'Mis Denuncias':
         icon='assignment'
       break;
       case 'Perfil':
@@ -70,7 +70,7 @@ export default class App extends Component {
               <Scene
                 key="newreport"
                 component={NewReport}
-                title="Nuevo Reporte"
+                title="Nueva Denuncia"
               />
               <Scene
                 key="viewreport"
@@ -79,20 +79,20 @@ export default class App extends Component {
               />
 
               {/* Tab and it's scenes */}
-              <Scene key="dashboard" title="Incidentes" icon={TabIcon} >
+              <Scene key="dashboard" title="Denuncias" icon={TabIcon} >
                 <Scene
                   key="dash"
                   component={DashBoard}
-                  title="Incidentes"
+                  title="Denuncias"
                 />
               </Scene>
 
               {/* Tab and it's scenes */}
-              <Scene key="myreports" title="Mis Reportes" icon={TabIcon}>
+              <Scene key="myreports" title="Mis Denuncias" icon={TabIcon}>
                 <Scene
                   key="myrep"
                   component={MyReports}
-                  title="Mis reportes"
+                  title="Mis Denuncias"
                 />
               </Scene>
 
