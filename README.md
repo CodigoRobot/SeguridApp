@@ -32,9 +32,9 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 
 5. Utilice las siguientes credenciales para acceder a la APP:
 
-   Usuario: ciudadano
+   __Usuario__: ciudadano
 
-   Password: ciudadano
+   __Password__: ciudadano
 
 
 ###IOS
@@ -46,10 +46,13 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 
 2. Utilice las siguientes credenciales para acceder a la APP:
 
-   Usuario: ciudadano
-   
-   Password: ciudadano
+   __Usuario__: ciudadano
+
+   __Password__: ciudadano
 
 
+###Escalar proyecto
+
+Si lo que desea es modificar el proyecto por favor siga las idicaciones de [React Native](https://facebook.github.io/react-native/docs/getting-started.htm)
 
 Nota: *Para utilizar este demo debe contar con conexión a internet o datos moviles.*
