@@ -28,11 +28,12 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 
 3. Descargue el archivo [sg.apk](https://coderobot.com.mx/sg.apk) y copielo en el destino de su preferencia dentro de su dispositivo móvil.
 
-4. EN su dispositivo móvil, instale la aplicación dirigiéndose a la carpeta destino seleccionada y haciendo clic sobre el archivo.
+4. En su dispositivo móvil, instale la aplicación dirigiéndose a la carpeta destino seleccionada y haciendo clic sobre el archivo.
 
 5. Utilice las siguientes credenciales para acceder a la APP:
 
    Usuario: ciudadano
+
    Password: ciudadano
 
 
@@ -46,6 +47,7 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 2. Utilice las siguientes credenciales para acceder a la APP:
 
    Usuario: ciudadano
+   
    Password: ciudadano
 
 
