@@ -51,7 +51,8 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
    __Password__: ciudadano
 
 
-###Escalar proyecto
+
+###Recompilar SeguridApp
 
 Si lo que desea es modificar el proyecto por favor siga las idicaciones de [React Native](https://facebook.github.io/react-native/docs/getting-started.htm)
 
