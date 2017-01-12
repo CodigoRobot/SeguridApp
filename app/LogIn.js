@@ -28,7 +28,7 @@ stylesheet.textbox.error.width = 250
 
 /*Function to custom validation*/
 function sameUser(x) {
-  return x.usuario === "user";
+  return x.usuario === "ciudadano";
 }
 
 /*Dafault structure to Form*/
@@ -56,7 +56,7 @@ var options = {
 var LogIn = React.createClass({
 
   componentWillMount() {
-   if(!this.state.loggedin) {
+   if(this.state.loggedin) {
        Actions.newreport()
    }
   },
@@ -75,7 +75,7 @@ var LogIn = React.createClass({
   onPress: function () {
       var value = this.refs.form.getValue();
       if (value) {
-        if(value.usuario=="user"&&value.usuario=="user"){
+        if(value.usuario=="ciudadano"&&value.usuario=="ciudadano"){
             Actions.dashboard()
             this.setState({ loggedin: true });
         }

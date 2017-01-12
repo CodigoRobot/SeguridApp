@@ -15,7 +15,7 @@ import  base64  from 'base-64'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 var headers = new Headers();
-headers.append("Authorization", "Basic " + base64.encode("admin:admin"));
+headers.append("Authorization", "Basic " + base64.encode("admin:admin3044"));
 
 export default class DashBoard extends Component {
 
@@ -32,11 +32,13 @@ export default class DashBoard extends Component {
        visiblePosition: false,
     }
   }
-
+componentDidUpdate(){
+  console.log("xfdfdsfsdf");
+}
   componentWillMount() {
 
     let markers;
-    fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/user-reports", {
+    fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/user-reports?page=0&size=10000", {
         headers: headers
       })
       .then((response) => {
@@ -58,13 +60,9 @@ export default class DashBoard extends Component {
            latitudeDelta: Number(.1),
            longitudeDelta: Number(.1),
          }
-         console.log(this.state.visiblePosition);
          var visiblePosition=true;
-
         this.setState({region});
         this.setState({visiblePosition});
-        console.log(this.state.visiblePosition);
-
       },
       (error) => alert(JSON.stringify(error)),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
@@ -76,7 +74,7 @@ export default class DashBoard extends Component {
 
     custoMarket= this.state.markers.map(function (marker) {
 
-      if(marker.position!==""&&marker.position!==undefined){
+      if(marker.position!==""&&marker.position!==null){
         marker.position2=marker.position.replace("POINT (", "").replace(")","").split(" ");
         marker.latlng={latitude: Number(marker.position2[1]),
             longitude: Number(marker.position2[0])}
@@ -86,14 +84,11 @@ export default class DashBoard extends Component {
         case 'EsperaAtencion':
             color= '#b71c1c'
         break;
-        case 'EnRevision':
-            color= '#0d47a1'
+        case 'Proceso':
+            color= '#b71c1c'
         break;
-        case 'EsperaInformacion':
-            color= '#006064'
-        break;
-        case 'Concluido':
-            color= '#880e4f'
+        case 'Resuelto':
+            color= '#b71c1c'
         break;
         default:
             color='white'
@@ -104,7 +99,6 @@ export default class DashBoard extends Component {
              key={marker.id}
              coordinate={marker.latlng}
              title=  {"Reporte "+marker.id}
-             description={marker.estadoReporte}
            >
             <Icon style={{fontSize: 40}}  name={"place"} color={color}/>
             </MapView.Marker>

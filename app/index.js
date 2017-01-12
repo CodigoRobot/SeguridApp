@@ -75,7 +75,7 @@ export default class App extends Component {
               <Scene
                 key="viewreport"
                 component={ViewReport}
-                title="Reporte"
+                title="Detalle de denuncia"
               />
 
               {/* Tab and it's scenes */}

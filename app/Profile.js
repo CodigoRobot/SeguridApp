@@ -7,13 +7,14 @@ import {
   View,
   Image,
   ScrollView,
-  TouchableHighlight
+  TouchableHighlight,
+  BackAndroid,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux'
 import  base64  from 'base-64'
 
 var headers = new Headers();
-headers.append("Authorization", "Basic " + base64.encode("user:user"));
+headers.append("Authorization", "Basic " + base64.encode("ciudadano:ciudadano"));
 
 /*
   Main class scene
@@ -26,14 +27,15 @@ export default class Profile extends Component {
   }
 
   componentWillMount() {
-
+    BackAndroid.addEventListener('hardwareBackPress', () => {return true});
     let profileinfo;
-    fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/users/user", {
+    fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/users/ciudadano", {
         headers: headers
       })
       .then((response) => {
             if(response._bodyInit!==""){
               profileinfo =JSON.parse("["+response._bodyInit+"]");
+              console.log(profileinfo);
               this.setState({ profileinfo });
             }
       })
@@ -70,7 +72,7 @@ export default class Profile extends Component {
         <ScrollView style={ {alignSelf: 'stretch',} } >
 
             <View style={styles.container}>
-                <TouchableHighlight key="user-edit" style={styles.wrapperImage} onPress={() => Actions.viewreport()} >
+                <TouchableHighlight key="user-edit" style={styles.wrapperImage}  >
                   <Image elevation={40} source={require('./img/fixed-picture.jpg')} style={styles.profileImage} />
                 </TouchableHighlight>
             </View>

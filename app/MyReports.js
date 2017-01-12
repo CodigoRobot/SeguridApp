@@ -8,12 +8,13 @@ import {
   ListView,
   ScrollView,
   TouchableHighlight,
+  BackAndroid
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import  base64  from 'base-64'
 
 var headers = new Headers();
-headers.append("Authorization", "Basic " + base64.encode("user:user"));
+headers.append("Authorization", "Basic " + base64.encode("ciudadano:ciudadano"));
 
 
 /*
@@ -27,9 +28,9 @@ export default class MyReports extends Component {
   }
 
   componentWillMount() {
-
+    BackAndroid.addEventListener('hardwareBackPress', () => {return true});
     let listreports;
-    fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/current-user-reports", {
+    fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/current-user-reports?page=0&size=10000&sort=id%2Cdesc", {
         headers: headers
       })
       .then((response) => {
@@ -47,28 +48,25 @@ export default class MyReports extends Component {
                 case 'EsperaAtencion':
                     st=styles.ea;
                 break;
-                case 'EnRevision':
-                    st=styles.er;
+                case 'Proceso':
+                    st=styles.pr;
                 break;
-                case 'EsperaInformacion':
-                    st=styles.ei;
-                break;
-                case 'Concluido':
-                    st=styles.cu;
+                case 'Resuelto':
+                    st=styles.re;
                 break;
             }
            return (
              <TouchableHighlight  key={item.id} onPress={() => Actions.viewreport({text:item.id})} >
              <View style={ StyleSheet.flatten([styles.row, st]) }>
                   <Text style={ styles.cell } >{item.id}</Text>
-                  <Text style={ styles.cell } >{item.fechaDelitoPolicia}</Text>
+                  <Text style={ styles.cell } > 13/01/2017</Text>
              </View>
               </TouchableHighlight>
            );
         });
         return (
         <View style={ styles.container }>
-          <ScrollView style={ {flex:1} } >
+          <ScrollView style={ {flex:1,alignSelf:'stretch'} } >
              <View style={ styles.header }>
                <Text style={ styles.headerText }>Folio Denuncia</Text>
                <Text style={ styles.headerText }>Fecha</Text>
@@ -81,14 +79,11 @@ export default class MyReports extends Component {
                <Text style={ StyleSheet.flatten([styles.statuscell, styles.ea]) }>
                  Espera de anteción
                </Text>
-               <Text style={ StyleSheet.flatten([styles.statuscell, styles.er]) }>
-                 En revisión
+               <Text style={ StyleSheet.flatten([styles.statuscell, styles.pr]) }>
+                 En proceso
                </Text>
-               <Text style={ StyleSheet.flatten([styles.statuscell, styles.ei]) }>
-                 Espera de información
-               </Text>
-               <Text style={ StyleSheet.flatten([styles.statuscell, styles.cu]) }>
-                 Culminado
+               <Text style={ StyleSheet.flatten([styles.statuscell, styles.re]) }>
+                 Resuelto
                </Text>
            </View>
          </View>
@@ -144,21 +139,19 @@ const styles = StyleSheet.create({
     flex: .5,
     textAlign: 'center',
     marginBottom:50,
-    height: 40,
+    paddingTop: 5,
+    height: 45,
     justifyContent: 'center',
     alignItems: 'center',
     fontWeight: 'bold',
   },
   ea:{
-    backgroundColor: '#b71c1c',
-  },
-  er:{
     backgroundColor: '#006064',
   },
-  ei:{
+  pr:{
     backgroundColor: '#0d47a1',
   },
-  cu:{
+  re:{
     backgroundColor: '#880e4f',
   },
 })

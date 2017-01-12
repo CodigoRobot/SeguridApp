@@ -8,19 +8,18 @@ import {
   Image,
   ScrollView,
   TextInput,
+  BackAndroid
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import t from 'tcomb-form-native'
 import validator from 'tcomb-validation'
 import MapView from 'react-native-maps'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import  base64  from 'base-64'
 
 var validate = validator.validate
 const Form = t.form.Form
 var styles_ = require('lodash')
-
-
-
 
 // clone the default stylesheet
 const stylesheet = styles_.cloneDeep(t.form.Form.stylesheet);
@@ -97,6 +96,7 @@ numeroUnidadPolicia : t.maybe(t.String),
 observacion : t.maybe(t.String),
 placasPolicia : t.maybe(t.String),
 policia : t.Boolean,
+"position": t.maybe(t.String),
 sobrenombreDenunciado : t.maybe(t.String),
 telefonoDenunciante : t.maybe(t.String)
 }), sameUser);
@@ -128,14 +128,20 @@ var options = {
   stylesheet: stylesheet
 };
 
+var headers = new Headers();
+headers.append("Authorization", "Basic " + base64.encode("ciudadano:ciudadano"));
+
 /*Main Class*/
 var NewReport = React.createClass({
 
 
   clearForm() {
    // clear content from all textbox
-   this.setState({ value: null });
+   this.setState({ value: {} });
    this.setState({ markup: [] });
+ },
+ componentWillMount(){
+     BackAndroid.addEventListener('hardwareBackPress', () => {return true});
  },
  getInitialState() {
     return {
@@ -167,10 +173,23 @@ var NewReport = React.createClass({
      });
    },
   onPress () {
-      var value = this.refs.form.getValue();
-      if (!value) {
+      var value = this.state.value;
+      this.state.marker.map(function (item) {
+
+              value.position="POINT ("+item.coordinate.longitude+" "+item.coordinate.latitude+")";
+      });
+
+      if (JSON.stringify(value)!='{}') {
             this.clearForm();
             Actions.myreports();
+            fetch("https://seguridmap.coderobot.com.mx:8443/sm/api/user-reports", {
+                headers: {'Content-Type': 'application/json', headers},
+                "method": "POST",
+                "body": JSON.stringify(value),
+                      }
+              ).then((response) => {
+              })
+              .done();
       }
       else{
 
@@ -184,7 +203,7 @@ var NewReport = React.createClass({
        })});
       }
     },
-    
+
     updateCurrentPosition() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -289,7 +308,7 @@ const styles = StyleSheet.create({
   current_position:{
     width: 35,
     height: 35,
-    marginTop: 70,
+    marginTop: 50,
     marginLeft: 50,
     borderRadius:20,
     alignSelf: 'flex-start',
