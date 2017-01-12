@@ -31,6 +31,7 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 4. EN su dispositivo móvil, instale la aplicación dirigiéndose a la carpeta destino seleccionada y haciendo clic sobre el archivo.
 
 5. Utilice las siguientes credenciales para acceder a la APP:
+
    Usuario: ciudadano
    Password: ciudadano
 
@@ -38,15 +39,15 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 ###IOS
 
 1. Para dispositivos IOS será necesaria la utilización de herramientas de testing independientes en las que podrá subir su archivo [sg.ipa](https://coderobot.com.mx/sg.ipa), le recomendamos las siguientes herramientas de testing:
-
-
 [BuildTesting](http://www.buildtesting.com/)
 [BuddyBuild](https://www.buddybuild.com/)
 
+
 2. Utilice las siguientes credenciales para acceder a la APP:
+
    Usuario: ciudadano
    Password: ciudadano
 
 
 
-*Para utilizar este demo debe contar con conexión a internet o datos moviles.*
+Nota: *Para utilizar este demo debe contar con conexión a internet o datos moviles.*
