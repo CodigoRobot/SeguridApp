@@ -26,7 +26,7 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 
 2. Conecte su dispositivo Android a la computadora.
 
-3. Descargue el archivo [sg.apk](https://coderobot.com.mx/sg.apk") y copielo en el destino de su preferencia dentro de su dispositivo móvil.
+3. Descargue el archivo [sg.apk](https://coderobot.com.mx/sg.apk) y copielo en el destino de su preferencia dentro de su dispositivo móvil.
 
 4. EN su dispositivo móvil, instale la aplicación dirigiéndose a la carpeta destino seleccionada y haciendo clic sobre el archivo.
 
@@ -37,7 +37,7 @@ Porfavor, para su instalación siga detenidamente los siguientes pasos:
 
 ###IOS
 
-1. Para dispositivos IOS será necesaria la utilización de herramientas de testing independientes en las que podrá subir su archivo [sg.ipa](https://coderobot.com.mx/sg.ipa"), le recomendamos las siguientes herramientas de testing:
+1. Para dispositivos IOS será necesaria la utilización de herramientas de testing independientes en las que podrá subir su archivo [sg.ipa](https://coderobot.com.mx/sg.ipa), le recomendamos las siguientes herramientas de testing:
 
 
 [BuildTesting](http://www.buildtesting.com/)
